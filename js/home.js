@@ -1,6 +1,14 @@
+let contactList;
 window.addEventListener('DOMContentLoaded',(event) => {
+    contactList = getContactDataFromStorage();
+    document.querySelector(".person-count").textContent = contactList.length;
     createInnerHtml();
   });
+
+  const getContactDataFromStorage = () => {
+    return localStorage.getItem("ContactList") ?
+                        JSON.parse(localStorage.getItem('ContactList')) : [];
+  }
 
   const createInnerHtml = () => {
     const headerHtml = ` 
@@ -13,9 +21,7 @@ window.addEventListener('DOMContentLoaded',(event) => {
       <th>Zip Code</th>
       
     `;
-    let contactList = createContactJSON();
     if(contactList.length == 0) return;
-    document.querySelector(".person-count").textContent = contactList.length;
     let innerHtml = `${headerHtml}`;
     for(const contactData of contactList)
     {
@@ -38,28 +44,4 @@ window.addEventListener('DOMContentLoaded',(event) => {
     `;
     }
   document.querySelector('#table-display').innerHTML = innerHtml;
-  }
-
-  const createContactJSON = () => {
-    let contactListLocal = [
-    {
-        _name: "Amit Kumar Prajapati",
-        _address: "Lane No 102",
-        _city: "Bawal",
-        _email: "amitnitsri25@gmail.com",
-        _phone: "9149947504",
-        _state: "Haryana",
-        _zip: "123501",
-    },
-    {
-        _name: "Bhanu Sharma",
-        _address: "Connaught Place",
-        _city: "New Delhi",
-        _email: "bhanu.s@hotmail.com",
-        _phone: "9413300163",
-        _state: "Delhi",
-        _zip: "110059",
-    }
-    ];
-    return contactListLocal;
   }
