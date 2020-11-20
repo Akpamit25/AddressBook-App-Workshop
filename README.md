@@ -1,3 +1,3 @@
 # AddressBook-App-Workshop
 
-UC6 : Ability to Update Address Book Contact Details
+UC6(Home Page) : Ability to Update Address Book Contact Details
