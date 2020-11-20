@@ -49,8 +49,7 @@ const save = (event) => {
   event.preventDefault();
   event.stopPropagation();
   let contactData = createContact();
-  let jsonObject = JSON.stringify(contactData);
-  alert(jsonObject);
+  createAndUpdateStorage(contactData);
 }
 
 const createContact = () => {
@@ -66,11 +65,24 @@ const createContact = () => {
   return contactData;
 }
 
+function createAndUpdateStorage(contactData){
+  let contactList = JSON.parse(localStorage.getItem("ContactList"));
+
+  if(contactList != undefined){
+      contactList.push(contactData);
+  }
+  else{
+      contactList = [contactData];
+  }
+  alert(contactList.toString());
+  localStorage.setItem("ContactList",JSON.stringify(contactList));
+}
+
 const getInputValueById = (id) => {
   let value = document.querySelector(id).value;
   return value;
 }
 
 const resetForm = () => {
-
+  
 }
